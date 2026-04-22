@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>呑蔵競馬 🍶 予想エンジン</title>
+<style>
+:root {
+  --bg:     #0a0a0f;
+  --bg2:    #121219;
+  --bg3:    #1c1c28;
+  --bg4:    #252535;
+  --gold:   #c9a84c;
+  --gold2:  #e8c56d;
+  --gold3:  #f5dfa0;
+  --red:    #b52c20;
+  --red2:   #d94032;
+  --text:   #e8e0d0;
+  --text2:  #a09880;
+  --text3:  #6a6050;
+  --border: #2a2a3a;
+  --border2:#3a3a50;
+  --green:  #3a7d44;
+  --cyan:   #2e7fa0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a0a0a 100%);
+  border-bottom: 2px solid var(--gold);
+  padding: 16px 20px 12px;
+  text-align: center;
+  position: relative;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 10px,
+    rgba(201,168,76,0.03) 10px, rgba(201,168,76,0.03) 11px
+  );
+  pointer-events: none;
+}
+.header h1 {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: var(--gold2);
+  text-shadow: 0 0 20px rgba(201,168,76,0.4);
+}
+.header .sub {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 2px;
+  margin-top: 3px;
+}
+
+/* ── MAIN CONTAINER ── */
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 12px 40px;
+}
+
+/* ── INPUT SECTION ── */
+.input-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+.input-section-header {
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.input-section-header .icon { font-size: 16px; }
+
+.input-group { padding: 12px 14px 0; }
+.input-label {
+  font-size: 11px;
+  color: var(--text2);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  display: block;
+}
+.input-label span {
+  color: var(--text3);
+  font-size: 10px;
+  margin-left: 6px;
+}
+
+textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: 'Courier New', 'Osaka-Mono', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  padding: 10px 12px;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+textarea::placeholder { color: var(--text3); font-size: 11px; }
+
+.input-actions {
+  padding: 12px 14px 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 16px;
+  transition: all 0.15s;
+}
+.btn-demo {
+  background: var(--bg4);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  flex: 1;
+}
+.btn-demo:hover { background: var(--bg3); color: var(--text); }
+
+.btn-run {
+  background: linear-gradient(135deg, var(--red) 0%, var(--red2) 100%);
+  color: #fff;
+  flex: 2;
+  box-shadow: 0 2px 12px rgba(181,44,32,0.4);
+}
+.btn-run:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(181,44,32,0.5);
+}
+.btn-run:active { transform: translateY(0); }
+
+/* ── RESULT SECTION ── */
+#result { display: none; margin-top: 16px; }
+
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+.tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  color: var(--text3);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 4px;
+  transition: all 0.15s;
+  position: relative;
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn:hover { background: var(--bg3); color: var(--text2); }
+.tab-btn.active {
+  background: var(--bg3);
+  color: var(--gold2);
+}
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* ── TAB CONTENT ── */
+.tab-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 16px;
+  display: none;
+}
+.tab-panel.active { display: block; }
+
+/* ── COMMON CONTENT STYLES ── */
+.panel-title {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+/* ── TAB 4: RANKING ── */
+.rank-list { display: flex; flex-direction: column; gap: 8px; }
+
+.rank-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.rank-card.rank-1 { border-color: var(--gold); }
+.rank-card.rank-2 { border-color: var(--text2); }
+.rank-card.rank-3 { border-color: #a06030; }
+.rank-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+.rank-card.rank-1::before { background: var(--gold); }
+.rank-card.rank-2::before { background: var(--text2); }
+.rank-card.rank-3::before { background: #a06030; }
+
+.rank-num {
+  font-size: 20px;
+  font-weight: 900;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.rank-1 .rank-num { color: var(--gold2); }
+.rank-2 .rank-num { color: var(--text2); }
+.rank-3 .rank-num { color: #c08040; }
+.rank-card:not(.rank-1):not(.rank-2):not(.rank-3) .rank-num { color: var(--text3); font-size: 15px; }
+
+.rank-badge {
+  font-size: 18px;
+  font-weight: 900;
+  width: 24px;
+  text-align: center;
+  background: var(--bg4);
+  border-radius: 3px;
+  padding: 1px 3px;
+  color: var(--text);
+  flex-shrink: 0;
+  min-width: 24px;
+}
+
+.rank-info { flex: 1; min-width: 0; }
+.rank-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rank-detail {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 2px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.rank-detail span { background: var(--bg4); padding: 1px 5px; border-radius: 2px; }
+
+.rank-score {
+  text-align: right;
+  flex-shrink: 0;
+}
+.rank-score .pts {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--gold2);
+}
+.rank-score .pts-label {
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: 1px;
+}
+
+/* Score bar */
+.score-bar-wrap {
+  margin-top: 3px;
+  background: var(--bg4);
+  border-radius: 2px;
+  height: 4px;
+  overflow: hidden;
+}
+.score-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--red) 0%, var(--gold) 100%);
+  transition: width 0.6s ease;
+}
+
+/* ── BREAKDOWN MINI ── */
+.score-breakdown {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+.score-item {
+  flex: 1;
+  background: var(--bg4);
+  border-radius: 3px;
+  padding: 3px 5px;
+  text-align: center;
+}
+.score-item .lbl { font-size: 9px; color: var(--text3); }
+.score-item .val { font-size: 12px; font-weight: 700; color: var(--text2); }
+
+/* ── TAB 0: 展開 ── */
+.pace-section { margin-bottom: 16px; }
+.pace-label {
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.pace-track {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 12px;
+}
+.pace-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+.pace-row:last-child { border-bottom: none; }
+.pace-style {
+  font-size: 12px;
+  font-weight: 700;
+  width: 48px;
+  flex-shrink: 0;
+  text-align: center;
+  padding: 3px;
+  border-radius: 3px;
+}
+.pace-nige   { background: rgba(209,56,40,0.25); color: #e87060; }
+.pace-senkou { background: rgba(201,168,76,0.2); color: var(--gold2); }
+.pace-sashi  { background: rgba(46,127,160,0.2); color: #60a8c8; }
+.pace-oikomi { background: rgba(58,125,68,0.2); color: #70c080; }
+
+.pace-horses {
+  font-size: 11px;
+  color: var(--text2);
+  flex: 1;
+}
+.pace-count {
+  font-size: 11px;
+  color: var(--text3);
+  width: 30px;
+  text-align: right;
+}
+
+.pace-prediction {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+
+/* ── BULLETS ── */
+.bullets { display: flex; flex-direction: column; gap: 10px; }
+.bullet-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  position: relative;
+  padding-left: 30px;
+}
+.bullet-item::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  font-size: 14px;
+}
+
+/* Commentary variants */
+.bullets.style-aguri .bullet-item {
+  border-color: rgba(181,44,32,0.4);
+  background: rgba(10,10,15,0.8);
+}
+.bullets.style-aguri .bullet-item::before { color: var(--red2); }
+
+.bullets.style-tsuu .bullet-item {
+  border-color: rgba(46,127,160,0.4);
+  background: rgba(10,10,15,0.8);
+}
+.bullets.style-tsukkomi .bullet-item {
+  border-color: rgba(58,125,68,0.3);
+}
+
+/* ── NOTICE / FLAVOR ── */
+.flavor-bar {
+  background: var(--bg3);
+  border-top: 1px solid var(--border);
+  padding: 8px 12px;
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* ── ERROR ── */
+.error-box {
+  background: rgba(181,44,32,0.1);
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  padding: 12px 14px;
+  color: var(--red2);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 400px) {
+  .rank-name { font-size: 13px; }
+  .rank-score .pts { font-size: 17px; }
+  .tab-btn { font-size: 12px; padding: 9px 2px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🍶 呑蔵競馬</h1>
+  <div class="sub">NOMIZO KEIBA PREDICTION ENGINE v1.0</div>
+</div>
+
+<div class="container">
+
+  <!-- INPUT -->
+  <div class="input-section">
+    <div class="input-section-header">
+      <span class="icon">📋</span> データ入力
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">
+        【出馬表】
+        <span>馬番｜馬名｜父｜母 （1頭1行）</span>
+      </label>
+      <textarea id="entryText" rows="8" placeholder="1｜ダンシングフレーム｜ハーツクライ｜オルフェーヴル
+2｜シルバームーン｜ディープインパクト｜キングカメハメハ
+…"></textarea>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">
+        【前走データ】
+        <span>馬番｜レース名｜着順｜着差｜上がり3F｜クラス</span>
+      </label>
+      <textarea id="prevText" rows="8" placeholder="1｜東京芝2000｜3｜0.5｜34.2｜3勝クラス
+2｜中山芝1600｜1｜ハナ｜33.8｜3勝クラス
+…"></textarea>
+    </div>
+
+    <div class="input-actions">
+      <button class="btn btn-demo" onclick="loadDemo()">🎲 デモデータ</button>
+      <button class="btn btn-run"  onclick="analyze()">🔥 分析スタート</button>
+    </div>
+  </div>
+
+  <!-- ERROR -->
+  <div id="errorBox" class="error-box" style="display:none;"></div>
+
+  <!-- RESULT -->
+  <div id="result">
+    <!-- TABS NAV -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="0" onclick="switchTab(0)">展</button>
+      <button class="tab-btn"        data-tab="1" onclick="switchTab(1)">コ</button>
+      <button class="tab-btn"        data-tab="2" onclick="switchTab(2)">煽</button>
+      <button class="tab-btn"        data-tab="3" onclick="switchTab(3)">通</button>
+      <button class="tab-btn"        data-tab="4" onclick="switchTab(4)">全</button>
+      <button class="tab-btn"        data-tab="5" onclick="switchTab(5)">突</button>
+    </div>
+
+    <!-- TAB 0: 展開予想 -->
+    <div class="tab-panel active" id="panel-0">
+      <div class="panel-title">⚡ 展開予想</div>
+      <div id="pace-content"></div>
+    </div>
+
+    <!-- TAB 1: コメント -->
+    <div class="tab-panel" id="panel-1">
+      <div class="panel-title">🍺 レースコメント</div>
+      <div id="comment-content" class="bullets"></div>
+    </div>
+
+    <!-- TAB 2: 煽り -->
+    <div class="tab-panel" id="panel-2">
+      <div class="panel-title">🔥 煽りコメント</div>
+      <div id="aguri-content" class="bullets style-aguri"></div>
+    </div>
+
+    <!-- TAB 3: 通人 -->
+    <div class="tab-panel" id="panel-3">
+      <div class="panel-title">🎩 通人の見立て</div>
+      <div id="tsuu-content" class="bullets style-tsuu"></div>
+    </div>
+
+    <!-- TAB 4: 全馬ランキング -->
+    <div class="tab-panel" id="panel-4">
+      <div class="panel-title">🏆 全馬スコアランキング</div>
+      <div id="rank-content" class="rank-list"></div>
+    </div>
+
+    <!-- TAB 5: ツッコミ -->
+    <div class="tab-panel" id="panel-5">
+      <div class="panel-title">😂 ツッコミ解説</div>
+      <div id="tsukkomi-content" class="bullets style-tsukkomi"></div>
+    </div>
+
+    <div class="flavor-bar">🍶 呑蔵競馬 — 飲みながら楽しむ予想エンジン。馬券購入は自己責任で。</div>
+  </div>
+
+</div>
+
+<script>
+// ── BLOOD LINE TABLE ──
+const SIRE_TABLE = {
+  // ±[tekisei, nouryoku]
+  'ディープインパクト':  [ 3,  3],
+  'キングカメハメハ':    [ 2,  2],
+  'ハーツクライ':        [ 2,  1],
+  'エピファネイア':      [ 2,  2],
+  'キタサンブラック':    [ 3,  2],
+  'ロードカナロア':      [ 1,  3],
+  'モーリス':            [ 1,  2],
+  'キズナ':              [ 2,  1],
+  'ルーラーシップ':      [ 1,  1],
+  'スワーヴリチャード':  [ 1,  2],
+  'ハービンジャー':      [ 2,  0],
+  'ゴールドシップ':      [ 0,  1],
+  'エイシンフラッシュ':  [ 1,  1],
+  'オルフェーヴル':      [ 0,  3],
+  'ジャスタウェイ':      [ 1,  2],
+  'ドゥラメンテ':        [ 2,  3],
+  'サートゥルナーリア':  [ 2,  2],
+  'コントレイル':        [ 2,  3],
+  'シルバーステート':    [ 1,  2],
+  'ブラックタイド':      [ 2,  1],
+  'フランケル':          [ 1,  3],
+  'ガリレオ':            [ 1,  2],
+  'ダンチヒ':            [ 0,  2],
+  'デイラミ':            [ 1,  1],
+  'デュランダル':        [ 0,  2],
+  'ステイゴールド':      [ 1,  1],
+  'アグネスタキオン':    [ 2,  1],
+  'サンデーサイレンス':  [ 3,  3],
+  'ブライアンズタイム':  [ 1,  1],
+};
+
+// ── PARSE HELPERS ──
+function parseEntry(raw) {
+  const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+  const horses = [];
+  for (const line of lines) {
+    const p = line.split(/[｜|]+/);
+    if (p.length < 2) continue;
+    horses.push({
+      num:   parseInt(p[0]) || horses.length + 1,
+      name:  p[1]?.trim() || '不明',
+      sire:  p[2]?.trim() || '',
+      dam:   p[3]?.trim() || '',
+    });
+  }
+  return horses;
+}
+
+function parsePrev(raw) {
+  const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+  const map = {};
+  for (const line of lines) {
+    const p = line.split(/[｜|]+/);
+    if (p.length < 2) continue;
+    const num = parseInt(p[0]);
+    map[num] = {
+      race:    p[1]?.trim() || '',
+      rank:    p[2]?.trim() || '0',
+      diff:    p[3]?.trim() || '0',
+      agari3f: p[4]?.trim() || '35.0',
+      cls:     p[5]?.trim() || '',
+    };
+  }
+  return map;
+}
+
+// ── SCORING ──
+function scoreHorse(horse, prev) {
+  // 適性 25–40
+  let tekisei = 30;
+  const rank = parseInt(prev.rank);
+  if (!isNaN(rank)) {
+    if (rank === 1)      tekisei += 5;
+    else if (rank === 2) tekisei += 3;
+    else if (rank === 3) tekisei += 1;
+    else if (rank >= 6)  tekisei -= 3;
+    else if (rank >= 5)  tekisei -= 2;
+  }
+
+  // 能力 20–35
+  let nouryoku = 27;
+  const agari = parseFloat(prev.agari3f);
+  if (!isNaN(agari)) {
+    if      (agari <= 32.5) nouryoku += 7;
+    else if (agari <= 33.0) nouryoku += 5;
+    else if (agari <= 33.5) nouryoku += 3;
+    else if (agari <= 34.0) nouryoku += 1;
+    else if (agari >= 35.5) nouryoku -= 4;
+    else if (agari >= 35.0) nouryoku -= 2;
+    else if (agari >= 34.5) nouryoku -= 1;
+  }
+
+  // 実行力 10–25
+  let jikkou = 17;
+  const d = prev.diff;
+  const closeFinishes = ['ハナ','アタマ','クビ','ネック','同着'];
+  if (closeFinishes.some(x => d.includes(x))) {
+    jikkou += (parseInt(prev.rank) === 1) ? 5 : 3;
+  } else {
+    const diffVal = parseFloat(d);
+    if (!isNaN(diffVal)) {
+      if      (diffVal <= 0.2) jikkou += 4;
+      else if (diffVal <= 0.5) jikkou += 2;
+      else if (diffVal <= 1.0) jikkou += 0;
+      else if (diffVal <= 2.0) jikkou -= 2;
+      else                     jikkou -= 4;
+    }
+  }
+
+  // 血統補正
+  const bm = SIRE_TABLE[horse.sire] || [0, 0];
+  tekisei  = Math.min(40, Math.max(25, tekisei  + bm[0]));
+  nouryoku = Math.min(35, Math.max(20, nouryoku + bm[1]));
+  jikkou   = Math.min(25, Math.max(10, jikkou));
+
+  const score = Math.round((tekisei * nouryoku * jikkou) / 35);
+  return { tekisei, nouryoku, jikkou, score, bloodBonus: bm };
+}
+
+// ── LEG STYLE ──
+function getLegStyle(prev, scoreData) {
+  const agari = parseFloat(prev.agari3f);
+  const rank  = parseInt(prev.rank);
+  const diff  = parseFloat(prev.diff) || 0;
+
+  // Classify by 上がり: lower = closer type
+  if (!isNaN(agari)) {
+    if (agari <= 33.2) return diff > 1.5 ? '追い込み' : '差し';
+    if (agari <= 33.8) return (rank <= 2) ? '先行' : '差し';
+    if (agari >= 35.0) return '逃げ';
+  }
+  if (!isNaN(rank) && rank <= 2) return '先行';
+  return '先行';
+}
+
+const LEG_LABELS = {
+  '逃げ':   { cls: 'pace-nige',   icon: '🔴' },
+  '先行':   { cls: 'pace-senkou', icon: '🟡' },
+  '差し':   { cls: 'pace-sashi',  icon: '🔵' },
+  '追い込み':{ cls: 'pace-oikomi', icon: '🟢' },
+};
+
+// ── PACE PREDICTION ──
+function buildPacePrediction(horses, prevMap, scored) {
+  const groups = { '逃げ': [], '先行': [], '差し': [], '追い込み': [] };
+  const horseStyles = {};
+
+  for (const h of horses) {
+    const p = prevMap[h.num] || { rank:'5', diff:'1', agari3f:'34.5', race:'', cls:'' };
+    const s = scored.find(x => x.num === h.num);
+    const style = getLegStyle(p, s);
+    groups[style].push(h);
+    horseStyles[h.num] = style;
+  }
+
+  const nigeCount   = groups['逃げ'].length;
+  const senkouCount = groups['先行'].length;
+
+  let paceType = 'ミドルペース';
+  let paceDesc = '';
+  if (nigeCount === 0) {
+    paceType = '超スローペース';
+    paceDesc = '逃げ馬不在。先行勢が雁行となる展開が予想される。上がり勝負。差し・追い込み型に有利。';
+  } else if (nigeCount === 1 && senkouCount <= 2) {
+    paceType = 'スローペース';
+    paceDesc = '逃げ1頭に対し先行が手薄。単騎逃げが成立しそうで、前が残りやすい展開。';
+  } else if (nigeCount >= 3 || (nigeCount >= 2 && senkouCount >= 3)) {
+    paceType = 'ハイペース';
+    paceDesc = '逃げ・先行馬が多く、序盤から激しい消耗戦になる可能性。差し・追い込みが台頭しやすい。';
+  } else {
+    paceType = 'ミドルペース';
+    paceDesc = '逃げ・先行が適度に揃い、展開は読みにくい。実力上位が素直に力を発揮しやすい。';
+  }
+
+  let html = `<div class="pace-section">
+    <div class="pace-label">脚質分布</div>
+    <div class="pace-track">`;
+
+  for (const [style, list] of Object.entries(groups)) {
+    if (list.length === 0) continue;
+    const info = LEG_LABELS[style];
+    // Show count only, no horse names in this view
+    html += `<div class="pace-row">
+      <span class="pace-style ${info.cls}">${style}</span>
+      <span class="pace-horses">${info.icon} ${'●'.repeat(list.length)} （${list.length}頭）</span>
+      <span class="pace-count">${list.length}頭</span>
+    </div>`;
+  }
+
+  html += `</div></div>
+  <div class="pace-section">
+    <div class="pace-label">ペース予想</div>
+    <div class="pace-prediction">
+      <strong style="color:var(--gold2)">【${paceType}】</strong><br>
+      ${paceDesc}
+    </div>
+  </div>`;
+
+  // Extra pace insight rows (no horse names)
+  const top3 = scored.slice(0, 3);
+  const top3Styles = top3.map(x => horseStyles[x.num]);
+  const frontTypes = top3Styles.filter(s => s === '逃げ' || s === '先行').length;
+
+  html += `<div class="pace-section">
+    <div class="pace-label">展開メモ</div>
+    <div class="pace-prediction">`;
+
+  if (frontTypes >= 2) {
+    html += '・スコア上位馬は前目につける脚質が多い。先行勢に有利な展開か。<br>';
+  } else {
+    html += '・スコア上位馬は差し・追い込みタイプが中心。末脚勝負に期待。<br>';
+  }
+
+  const fastFinishers = scored.filter(x => {
+    const p = prevMap[x.num];
+    return p && parseFloat(p.agari3f) <= 33.5;
+  });
+  if (fastFinishers.length >= 2) {
+    html += `・末脚の速い馬が${fastFinishers.length}頭おり、直線の競り合いが激化する可能性。<br>`;
+  }
+
+  html += `</div></div>`;
+  return html;
+}
+
+// ── TEMPLATE BANKS ──
+const COMMENT_TEMPLATES = [
+  (r, n) => `前走${r.rank}着（上がり${r.agari3f}秒）の実績から、今回も安定したパフォーマンスが期待できる馬が上位に集まっている。${r.diff !== '0' ? `着差${r.diff}という詰め方は見どころがあった。` : ''}`,
+  (r, n) => `着差${['ハナ','アタマ','クビ','ネック'].some(x=>r.diff?.includes(x)) ? 'わずかで惜敗' : r.diff+'秒差'}の前走組が上位を形成。仕上がり次第では大きな逆転も。`,
+  (r, n) => `上がり${r.agari3f}秒というフィニッシュスピードは${parseFloat(r.agari3f)<=33.5?'このメンバーでも際立つ水準':'平均的な水準'}。展開が嵌れば一変もある。`,
+  (r, n) => `クラス実績（${r.cls}）から、今回のメンバーに対し適性がある馬と力負けが懸念される馬で明確に分かれそうなレース。`,
+  (r, n) => `前走のレース内容（${r.race}）を踏まえると、今回の条件変化がプラスに働くかどうかが鍵になりそう。`,
+];
+
+const AGURI_TEMPLATES = [
+  (r, n) => `前走${r.rank}着？まだ本番来てないって感じがプンプンするな。お試しレースだったんじゃないの？`,
+  (r, n) => `上がり${r.agari3f}秒で${parseInt(r.rank)<=3?'好位置につけてた':'後方から追い上げてた'}ってことは、距離・コース替わりで化ける可能性もゼロじゃない。まあ知らんけど。`,
+  (r, n) => `${parseFloat(r.agari3f) <= 33.5 ? '末脚だけは本物なんだよな。折り合えれば怖い。' : '上がりタイムがなぁ……これじゃ差し切れないんじゃないの？現実見ようぜ。'}`,
+  (r, n) => `${r.diff}差で負けたって、要するに実力差がそれだけあるってこと。自己申告じゃないんだから。`,
+  (r, n) => `${r.cls}で${r.rank}着ね。格上挑戦でその結果なら評価できる。でも今日勝てるかは別の話。`,
+  (r, n) => `ほら、また「前走着順良かった馬」が人気になって沈むパターンじゃないの？競馬ってそういうもん。`,
+];
+
+const TSUU_TEMPLATES = [
+  (r, n) => `前走${r.race}で記録した上がり${r.agari3f}秒は、このクラスの平均と比較して${parseFloat(r.agari3f)<=33.8?'明らかに優位':'やや物足りない'}。ラップ構成から本質的なスタミナ型か瞬発力型かを見極める必要がある。`,
+  (r, n) => `${r.rank}着という結果のみを評価するのは早計。${['ハナ','クビ','アタマ'].some(x=>r.diff?.includes(x))?'僅差の敗戦はメンバー・展開次第で容易に逆転可能。':'着差は正直だが、包まれる不利・出遅れなどトラックバイアスも考慮すべき。'}`,
+  (r, n) => `血統面では父系の適性と今回の条件（距離・馬場）がクロスする配合かを確認したい。${r.cls}での実績はフロックではない可能性が高い。`,
+  (r, n) => `上がり3Fのタイム（${r.agari3f}秒）と着差（${r.diff}）を組み合わせると、ペース耐性が${parseFloat(r.agari3f)<=33.5&&(parseFloat(r.diff)||0)<=0.5?'極めて高く':'まだ発展途上で'}、フォームの完成度が伺える。`,
+  (r, n) => `${r.race}における位置取りと最終的な着順・着差から導けるギアシフトの質を評価すると、今回の距離延長（短縮）が${Math.random()>0.5?'有利':'リスク'}に働く蓋然性がある。`,
+];
+
+const TSUKKOMI_TEMPLATES = [
+  (r, n) => `前走${r.rank}着で「次は勝つ」って、毎回そう言ってない？その台詞もう聞き飽きたんだけど。`,
+  (r, n) => `上がり${r.agari3f}秒って……${parseFloat(r.agari3f)<=33.5?'それ本当にこのクラスの馬？強すぎる。':'コンマ何秒で人生変わるのが競馬の残酷なところ。'}`,
+  (r, n) => `着差${r.diff}って「ほぼ届いてた」じゃなくて「届いてない」んですよ。日本語って難しいですよね。`,
+  (r, n) => `${r.cls}上がりのくせに急に今日だけ強くなる、ってシナリオを毎回考えてしまう自分が怖い。`,
+  (r, n) => `えっ、前走${r.race}って${parseInt(r.rank)===1?'1着なの？じゃあなんでこんなに人気薄なの？':'何着なの？それで今日買う理由ある？'}`,
+  (r, n) => `人気馬ほど負けた理由が丁寧に解説されて、穴馬ほど「なぜ来たのか」が謎のまま終わる。それが競馬。`,
+];
+
+function pick(arr, idx) {
+  return arr[idx % arr.length];
+}
+
+function buildBullets(horses, prevMap, templates, iconList, maxBullets = 5) {
+  const sorted = [...horses].sort((a, b) => {
+    const pa = prevMap[a.num] || {};
+    const pb = prevMap[b.num] || {};
+    return (parseFloat(pa.agari3f) || 35) - (parseFloat(pb.agari3f) || 35);
+  });
+
+  const count = Math.max(3, Math.min(maxBullets, horses.length));
+  let html = '';
+  for (let i = 0; i < count; i++) {
+    const h = sorted[i % sorted.length];
+    const prev = prevMap[h.num] || { rank:'?', diff:'?', agari3f:'35.0', race:'', cls:'', diff:'?' };
+    const icon = iconList[i % iconList.length];
+    const text = templates[i % templates.length](prev, h.name);
+    html += `<div class="bullet-item" data-icon="${icon}">${text}</div>`;
+  }
+  return html;
+}
+
+// ── MAIN ANALYZE ──
+function analyze() {
+  const errorBox = document.getElementById('errorBox');
+  errorBox.style.display = 'none';
+
+  const entryRaw = document.getElementById('entryText').value.trim();
+  const prevRaw  = document.getElementById('prevText').value.trim();
+
+  if (!entryRaw) {
+    showError('出馬表を入力してください。');
+    return;
+  }
+  if (!prevRaw) {
+    showError('前走データを入力してください。');
+    return;
+  }
+
+  const horses  = parseEntry(entryRaw);
+  const prevMap = parsePrev(prevRaw);
+
+  if (horses.length < 2) {
+    showError('出馬表に最低2頭分のデータを入力してください。');
+    return;
+  }
+
+  // Score each horse
+  const scored = horses.map(h => {
+    const p = prevMap[h.num] || { rank:'5', diff:'1.0', agari3f:'34.5', race:'前走不明', cls:'不明' };
+    const s = scoreHorse(h, p);
+    return { ...h, ...s };
+  }).sort((a, b) => b.score - a.score);
+
+  const maxScore = scored[0]?.score || 1;
+
+  // ── TAB 4: RANKING ──
+  let rankHtml = '';
+  scored.forEach((h, idx) => {
+    const rankClass = idx === 0 ? 'rank-1' : idx === 1 ? 'rank-2' : idx === 2 ? 'rank-3' : '';
+    const rankIcon  = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx + 1}位`;
+    const pct = Math.round((h.score / maxScore) * 100);
+    const prev = prevMap[h.num] || {};
+    const bloodStr = (h.bloodBonus[0] !== 0 || h.bloodBonus[1] !== 0)
+      ? `血統${h.bloodBonus[0]>=0?'+':''}${h.bloodBonus[0]}/${h.bloodBonus[1]>=0?'+':''}${h.bloodBonus[1]}`
+      : '血統±0';
+
+    rankHtml += `<div class="rank-card ${rankClass}">
+      <div class="rank-num">${rankIcon}</div>
+      <div class="rank-badge">${h.num}</div>
+      <div class="rank-info">
+        <div class="rank-name">${h.name}</div>
+        <div class="rank-detail">
+          <span>父:${h.sire||'不明'}</span>
+          <span>${prev.race||'前走不明'}</span>
+          <span>前走${prev.rank||'?'}着</span>
+          <span>${bloodStr}</span>
+        </div>
+        <div class="score-breakdown">
+          <div class="score-item"><div class="lbl">適性</div><div class="val">${h.tekisei}</div></div>
+          <div class="score-item"><div class="lbl">能力</div><div class="val">${h.nouryoku}</div></div>
+          <div class="score-item"><div class="lbl">実行力</div><div class="val">${h.jikkou}</div></div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar" style="width:${pct}%"></div>
+        </div>
+      </div>
+      <div class="rank-score">
+        <div class="pts">${h.score}</div>
+        <div class="pts-label">pts</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('rank-content').innerHTML = rankHtml;
+
+  // ── TAB 0: 展開 ──
+  document.getElementById('pace-content').innerHTML = buildPacePrediction(horses, prevMap, scored);
+
+  // ── TAB 1: コメント ──
+  document.getElementById('comment-content').innerHTML = buildBullets(
+    horses, prevMap,
+    COMMENT_TEMPLATES,
+    ['🍺','📊','🎯','💡','🔍','📌'],
+    Math.max(3, Math.min(6, horses.length))
+  );
+
+  // ── TAB 2: 煽り ──
+  document.getElementById('aguri-content').innerHTML = buildBullets(
+    horses, prevMap,
+    AGURI_TEMPLATES,
+    ['🔥','💢','😤','⚡','🃏','🎰'],
+    Math.max(3, Math.min(6, horses.length))
+  );
+
+  // ── TAB 3: 通人 ──
+  document.getElementById('tsuu-content').innerHTML = buildBullets(
+    horses, prevMap,
+    TSUU_TEMPLATES,
+    ['🎩','📐','🔬','📈','🧠','🎗️'],
+    Math.max(3, Math.min(6, horses.length))
+  );
+
+  // ── TAB 5: ツッコミ ──
+  document.getElementById('tsukkomi-content').innerHTML = buildBullets(
+    horses, prevMap,
+    TSUKKOMI_TEMPLATES,
+    ['😂','🙄','😅','🤔','😩','🤣'],
+    Math.max(3, Math.min(6, horses.length))
+  );
+
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  switchTab(0);
+}
+
+// ── TAB SWITCH ──
+function switchTab(idx) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.tab) === idx);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.id === `panel-${idx}`);
+  });
+}
+
+// ── ERROR ──
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  box.textContent = '⚠ ' + msg;
+  box.style.display = 'block';
+}
+
+// ── DEMO DATA ──
+function loadDemo() {
+  document.getElementById('entryText').value =
+`1｜ダンシングフレーム｜ハーツクライ｜オルフェーヴル
+2｜シルバームーン｜ディープインパクト｜キングカメハメハ
+3｜ゴールデンフラッシュ｜エピファネイア｜ルーラーシップ
+4｜サクラエクラン｜キズナ｜モーリス
+5｜ブラックタイガー｜ロードカナロア｜ハービンジャー
+6｜クリムゾンスター｜モーリス｜ディープインパクト
+7｜ホワイトウィンド｜キタサンブラック｜ゴールドシップ
+8｜アンバーライト｜スワーヴリチャード｜エイシンフラッシュ`;
+
+  document.getElementById('prevText').value =
+`1｜東京芝2000｜3｜0.5｜34.2｜3勝クラス
+2｜中山芝1600｜1｜ハナ｜33.8｜3勝クラス
+3｜阪神芝2400｜2｜クビ｜34.5｜3勝クラス
+4｜東京芝1800｜5｜1.2｜35.1｜3勝クラス
+5｜中山芝1200｜1｜1.5｜33.1｜3勝クラス
+6｜京都芝2000｜4｜0.8｜34.0｜3勝クラス
+7｜東京芝2400｜2｜ネック｜34.8｜3勝クラス
+8｜阪神芝1600｜3｜0.6｜33.9｜3勝クラス`;
+}
+</script>
+</body>
+</html>
