@@ -14,7 +14,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;bac
 .nav a:hover{color:#c8911a}
 #loginWrap{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 53px);padding:20px}
 .login-card{background:#1e1610;border:1px solid #3a2e1e;border-radius:20px;padding:40px;max-width:400px;width:100%;text-align:center}
-.lock{font-size:3rem;margin-bottom:16px}
 .login-card h2{font-size:1.4rem;margin-bottom:8px}
 .login-card p{color:#b8a888;font-size:0.9rem;margin-bottom:28px;line-height:1.6}
 .login-card input{width:100%;padding:13px 16px;background:#100c08;border:1px solid #3a2e1e;border-radius:10px;color:#fff;font-size:1rem;outline:none;margin-bottom:12px}
@@ -25,60 +24,78 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans',sans-serif;bac
 .signup-link{margin-top:18px;font-size:0.82rem;color:#b8a888}
 .signup-link a{color:#c8911a}
 #premiumWrap{display:none}
-.hero-p{background:linear-gradient(135deg,#1e1610,#2a1a08);padding:24px 20px;text-align:center;border-bottom:1px solid #3a2e1e}
-.hero-p h1{font-size:1.4rem;margin-bottom:4px}
-.hero-p p{color:#b8a888;font-size:0.88rem}
+.hero-p{background:linear-gradient(135deg,#1e1610,#2a1a08);padding:20px;text-align:center;border-bottom:1px solid #3a2e1e}
+.hero-p h1{font-size:1.3rem;margin-bottom:4px}
+.hero-p p{color:#b8a888;font-size:0.85rem}
+.data-bar{background:#1e1610;border-bottom:1px solid #3a2e1e;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;font-size:0.8rem}
+.data-status{display:flex;align-items:center;gap:6px}
+.dot-live{width:7px;height:7px;border-radius:50%;background:#8fb87a;animation:pulse 2s infinite}
+.dot-sample{width:7px;height:7px;border-radius:50%;background:#c8911a}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 .tabs{display:flex;background:#1e1610;border-bottom:1px solid #3a2e1e;overflow-x:auto}
-.tab{padding:12px 18px;cursor:pointer;font-size:0.88rem;color:#b8a888;border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0}
+.tab{padding:12px 18px;cursor:pointer;font-size:0.85rem;color:#b8a888;border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0}
 .tab.active{color:#c8911a;border-bottom-color:#c8911a}
-.panel{display:none;padding:20px;max-width:900px;margin:0 auto}
+.panel{display:none;padding:20px;max-width:960px;margin:0 auto}
 .panel.active{display:block}
 .card{background:#1e1610;border:1px solid #3a2e1e;border-radius:12px;padding:20px;margin-bottom:16px}
-.card h3{font-size:1rem;color:#c8911a;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.race-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.race-pill{padding:6px 12px;background:#100c08;border:1px solid #3a2e1e;border-radius:20px;cursor:pointer;font-size:0.82rem;color:#b8a888}
-.race-pill.active{background:#c8911a;color:#100c08;border-color:#c8911a;font-weight:bold}
-table{width:100%;border-collapse:collapse;font-size:0.85rem}
-th{background:#100c08;padding:8px 10px;text-align:left;color:#b8a888;border-bottom:1px solid #3a2e1e}
+.card h3{font-size:0.95rem;color:#c8911a;margin-bottom:12px}
+.info-box{background:#1a1208;border-left:3px solid #c8911a;padding:12px 16px;border-radius:0 8px 8px 0;font-size:0.82rem;color:#b8a888;margin-bottom:16px;line-height:1.6}
+/* ロード入力エリア */
+.race-input-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:12px}
+.input-label{font-size:0.75rem;color:#b8a888;display:block;margin-bottom:3px}
+input[type=text],input[type=number],select,textarea{background:#100c08;border:1px solid #3a2e1e;border-radius:7px;color:#e8e8f0;padding:7px 11px;font-size:0.88rem;outline:none;width:100%}
+input:focus,select:focus,textarea:focus{border-color:#c8911a}
+textarea{resize:vertical;min-height:120px;font-family:monospace;font-size:0.78rem}
+.btn-sm{padding:8px 16px;background:#c8911a;color:#100c08;border:none;border-radius:7px;font-size:0.85rem;font-weight:bold;cursor:pointer}
+.btn-sm:hover{background:#e0a832}
+.btn-outline{padding:8px 14px;background:transparent;border:1px solid #3a2e1e;color:#b8a888;border-radius:7px;font-size:0.82rem;cursor:pointer}
+.btn-outline:hover{border-color:#c8911a;color:#c8911a}
+.btn-danger{padding:6px 12px;background:transparent;border:1px solid #ff6b6b;color:#ff6b6b;border-radius:7px;font-size:0.8rem;cursor:pointer}
+.btn-danger:hover{background:#ff6b6b;color:#fff}
+/* テーブル */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.83rem}
+th{background:#100c08;padding:8px 10px;text-align:left;color:#b8a888;border-bottom:1px solid #3a2e1e;white-space:nowrap}
 td{padding:9px 10px;border-bottom:1px solid #221a10}
 tr:hover td{background:#221a10}
 .ev-high{color:#8fb87a;font-weight:bold}
 .ev-mid{color:#c8911a}
-.ev-low{color:#666}
-.rec-buy{background:#1e2e18;color:#8fb87a;padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:bold}
-.rec-watch{background:#2e2810;color:#c8911a;padding:2px 8px;border-radius:10px;font-size:0.78rem}
-.rec-skip{color:#555;font-size:0.78rem}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.stat{background:#100c08;border-radius:10px;padding:14px;text-align:center}
-.stat-n{font-size:1.8rem;font-weight:bold;color:#c8911a}
-.stat-l{font-size:0.78rem;color:#b8a888;margin-top:2px}
-.history-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #221a10;font-size:0.85rem}
+.ev-low{color:#555}
+.badge-buy{background:#1e2e18;color:#8fb87a;padding:2px 8px;border-radius:8px;font-size:0.76rem;font-weight:bold;white-space:nowrap}
+.badge-watch{background:#2e2810;color:#c8911a;padding:2px 8px;border-radius:8px;font-size:0.76rem;white-space:nowrap}
+.badge-skip{color:#444;font-size:0.76rem}
+/* 注目馬カード */
+.pick-card{background:linear-gradient(135deg,#1e1a10,#1a2010);border:1px solid #3a3020;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.pick-left .race-nm{font-size:0.76rem;color:#b8a888;margin-bottom:3px}
+.pick-left .horse-nm{font-size:1.05rem;font-weight:bold;color:#c8911a;margin-bottom:2px}
+.pick-left .pick-detail{font-size:0.78rem;color:#8fb87a}
+.pick-right{text-align:right;flex-shrink:0}
+/* シム */
+.sim-result{background:#100c08;border-radius:8px;padding:14px;margin-top:12px}
+.sim-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #221a10;font-size:0.83rem}
+.sim-row:last-child{border-bottom:none;font-weight:bold;color:#c8911a;padding-top:10px}
+/* 記録 */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.stat-box{background:#100c08;border-radius:8px;padding:12px;text-align:center}
+.stat-n{font-size:1.6rem;font-weight:bold;color:#c8911a}
+.stat-l{font-size:0.72rem;color:#b8a888;margin-top:2px}
+.rec-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #221a10;font-size:0.83rem}
 .hit{color:#8fb87a;font-weight:bold}
 .miss{color:#555}
-select,input[type=number],input[type=text]{background:#100c08;border:1px solid #3a2e1e;border-radius:8px;color:#fff;padding:8px 12px;font-size:0.9rem;outline:none}
-select:focus,input[type=number]:focus,input[type=text]:focus{border-color:#c8911a}
-.btn-sm{padding:8px 16px;background:#c8911a;color:#100c08;border:none;border-radius:8px;font-size:0.85rem;font-weight:bold;cursor:pointer}
-.btn-sm:hover{background:#e0a832}
-.btn-outline{padding:8px 16px;background:transparent;border:1px solid #3a2e1e;color:#b8a888;border-radius:8px;font-size:0.85rem;cursor:pointer}
-.btn-outline:hover{border-color:#c8911a;color:#c8911a}
-.btn-danger{padding:7px 14px;background:transparent;border:1px solid #ff6b6b;color:#ff6b6b;border-radius:8px;font-size:0.82rem;cursor:pointer}
-.btn-danger:hover{background:#ff6b6b;color:#fff}
-.today-pick{background:linear-gradient(135deg,#1a2a1a,#0a1a0a);border:1px solid #2a4a2a;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.pick-race{font-size:0.78rem;color:#b8a888;margin-bottom:4px}
-.pick-horse{font-size:1.05rem;font-weight:bold;color:#c8911a}
-.pick-ev{font-size:0.82rem;color:#8fb87a}
-.sim-result{background:#100c08;border-radius:10px;padding:16px;margin-top:12px}
-.sim-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #221a10;font-size:0.85rem}
-.sim-row:last-child{border-bottom:none;font-weight:bold;color:#c8911a}
-.loading{text-align:center;color:#b8a888;padding:30px;font-size:0.9rem}
-.badge-g1{background:#c0392b;color:#fff;font-size:10px;padding:1px 6px;border-radius:4px;margin-left:6px}
-.badge-g2{background:#8e44ad;color:#fff;font-size:10px;padding:1px 6px;border-radius:4px;margin-left:6px}
-.badge-g3{background:#2980b9;color:#fff;font-size:10px;padding:1px 6px;border-radius:4px;margin-left:6px}
-.info-box{background:#0f1a2a;border-left:3px solid #c8911a;padding:12px 16px;border-radius:0 8px 8px 0;font-size:0.85rem;color:#b8a888;margin-bottom:16px;line-height:1.6}
-@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.panel{padding:12px}}
+/* ピル */
+.race-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.pill{padding:5px 12px;background:#100c08;border:1px solid #3a2e1e;border-radius:16px;cursor:pointer;font-size:0.8rem;color:#b8a888}
+.pill.active{background:#c8911a;color:#100c08;border-color:#c8911a;font-weight:bold}
+.badge-g1{background:#7a1a1a;color:#ffb0a0;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px}
+.badge-g2{background:#3a1a5a;color:#c8a0e8;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px}
+.badge-g3{background:#1a2a5a;color:#a0c0f0;font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px}
+.loading{text-align:center;color:#b8a888;padding:30px;font-size:0.85rem}
+.alert-warn{background:#2a2010;border:1px solid #5a4020;border-radius:8px;padding:12px 16px;font-size:0.82rem;color:#c8911a;margin-bottom:12px}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}.panel{padding:12px}.pick-card{flex-direction:column}.pick-right{text-align:left}}
 </style>
 </head>
 <body>
+
 <nav class="nav">
   <div class="nav-logo">運が馬を引き寄せる！<span class="badge-p">PREMIUM</span></div>
   <div style="display:flex;gap:12px;align-items:center">
@@ -91,7 +108,7 @@ select:focus,input[type=number]:focus,input[type=text]:focus{border-color:#c8911
 <!-- ログイン -->
 <div id="loginWrap">
   <div class="login-card">
-    <div class="lock">🔐</div>
+    <div style="font-size:3rem;margin-bottom:16px">🔐</div>
     <h2>プレミアムログイン</h2>
     <p>月額980円会員限定。<br>パスワードはnoteのDMでお送りします。</p>
     <input type="password" id="pw" placeholder="パスワードを入力" onkeydown="if(event.key==='Enter')doLogin()">
@@ -105,248 +122,517 @@ select:focus,input[type=number]:focus,input[type=text]:focus{border-color:#c8911
 <div id="premiumWrap">
   <div class="hero-p">
     <h1>🏇 運が馬を引き寄せる！ プレミアム</h1>
-    <p>期待値（EV）ベースの科学的予想で、長期プラスを目指す</p>
+    <p>期待値（EV）ベースの科学的予想 ― 長期プラスを目指す</p>
+  </div>
+  <div class="data-bar">
+    <div class="data-status" id="dataStatus"><div class="dot-sample"></div><span id="dataStatusTxt">データ読み込み中...</span></div>
+    <button class="btn-outline" style="padding:4px 10px;font-size:0.76rem" onclick="loadData()">🔄 更新</button>
   </div>
 
   <div class="tabs">
     <div class="tab active" onclick="switchTab('today')">📅 本日の注目馬</div>
     <div class="tab" onclick="switchTab('ev')">📊 EV詳細分析</div>
-    <div class="tab" onclick="switchTab('sim')">🧮 馬券シミュレーター</div>
+    <div class="tab" onclick="switchTab('manual')">✏️ オッズ手入力</div>
+    <div class="tab" onclick="switchTab('sim')">🧮 シミュレーター</div>
     <div class="tab" onclick="switchTab('record')">📈 予想記録帳</div>
   </div>
 
-  <!-- タブ1: 本日の注目馬 -->
+  <!-- 本日の注目馬 -->
   <div id="tab-today" class="panel active">
     <div class="info-box">
-      期待値（EV）= AI予測確率 × 単勝オッズ。<strong style="color:#c8911a">EV1.2以上が推奨買い</strong>、1.0以上が検討圏です。長期的にはEV>1.0の馬だけ買い続けることで回収率100%超えを目指します。
+      <strong style="color:#c8911a">EV（期待値）= 独自確率モデル × 単勝オッズ</strong><br>
+      EV1.2以上 ◎強推奨 ／ EV1.0〜1.2 ○検討 ／ EV1.0未満 ─見。<br>
+      EV>1.0の馬だけを長期的に買い続けることで、理論上の回収率100%超えを目指します。
     </div>
-    <div id="todayPicks"></div>
+    <div id="todayPicks"><div class="loading">データを読み込んでいます...</div></div>
   </div>
 
-  <!-- タブ2: EV詳細分析 -->
+  <!-- EV詳細分析 -->
   <div id="tab-ev" class="panel">
     <div class="card">
       <h3>🏟 レース選択</h3>
-      <div class="race-pills" id="racePills"></div>
+      <div class="race-pills" id="racePills"><div class="loading">...</div></div>
       <div id="evTable"><div class="loading">レースを選択してください</div></div>
     </div>
   </div>
 
-  <!-- タブ3: 馬券シミュレーター -->
-  <div id="tab-sim" class="panel">
+  <!-- 手動入力 -->
+  <div id="tab-manual" class="panel">
     <div class="card">
-      <h3>🧮 予算から推奨買い目を計算</h3>
-      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <h3>✏️ オッズ手入力でEV計算</h3>
+      <p style="font-size:0.82rem;color:#b8a888;margin-bottom:14px">
+        netkeibaやJRA公式でオッズを確認して下記に入力してください。<br>
+        1行1頭、形式：<code style="color:#c8911a">馬名,単勝オッズ,前走着順,斤量</code>
+      </p>
+      <div class="race-input-grid">
         <div>
-          <label style="font-size:0.82rem;color:#b8a888;display:block;margin-bottom:4px">予算（円）</label>
-          <input type="number" id="budget" value="3000" min="100" step="100" style="width:120px">
+          <label class="input-label">レース名</label>
+          <input type="text" id="manualRaceName" placeholder="例: 天皇賞(春)">
         </div>
         <div>
-          <label style="font-size:0.82rem;color:#b8a888;display:block;margin-bottom:4px">馬券種別</label>
-          <select id="betType">
-            <option value="win">単勝</option>
-            <option value="place">複勝</option>
-            <option value="exacta">馬連</option>
+          <label class="input-label">グレード</label>
+          <select id="manualGrade">
+            <option value="G1">G1</option>
+            <option value="G2">G2</option>
+            <option value="G3" selected>G3</option>
+            <option value="OP">オープン</option>
           </select>
         </div>
+        <div>
+          <label class="input-label">距離・馬場</label>
+          <input type="text" id="manualDistance" placeholder="例: 3200m芝">
+        </div>
+      </div>
+      <label class="input-label">出走馬データ（1行1頭）</label>
+      <textarea id="manualData" placeholder="ディープインパクト,3.5,1,57
+キタサンブラック,5.2,2,57
+オルフェーヴル,8.0,1,57
+ゴールドシップ,12.0,3,57
+フェノーメノ,18.0,4,57"></textarea>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn-sm" onclick="calcManual()">📊 EV計算する</button>
+        <button class="btn-outline" onclick="loadSample()">サンプルを読み込む</button>
+      </div>
+      <div id="manualResult" style="margin-top:16px"></div>
+    </div>
+  </div>
+
+  <!-- シミュレーター -->
+  <div id="tab-sim" class="panel">
+    <div class="card">
+      <h3>🧮 予算配分シミュレーター</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <div>
+          <label class="input-label">予算（円）</label>
+          <input type="number" id="budget" value="3000" min="100" step="100" style="width:110px">
+        </div>
+        <div>
+          <label class="input-label">馬券種別</label>
+          <select id="betType" style="width:100px">
+            <option value="win">単勝</option>
+            <option value="place">複勝</option>
+            <option value="quinella">馬連</option>
+          </select>
+        </div>
+        <div>
+          <label class="input-label">最低EV閾値</label>
+          <input type="number" id="evThreshold" value="1.1" step="0.05" min="1.0" style="width:80px">
+        </div>
         <div style="align-self:flex-end">
-          <button class="btn-sm" onclick="calcSim()">計算する</button>
+          <button class="btn-sm" onclick="calcSim()">計算</button>
         </div>
       </div>
       <div id="simResult"></div>
     </div>
   </div>
 
-  <!-- タブ4: 予想記録帳 -->
+  <!-- 予想記録帳 -->
   <div id="tab-record" class="panel">
     <div class="stats-grid" id="recordStats"></div>
     <div class="card">
-      <h3>➕ 予想を記録する</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-        <div>
-          <label style="font-size:0.78rem;color:#b8a888;display:block;margin-bottom:4px">レース名</label>
-          <input type="text" id="recRace" placeholder="例: 天皇賞(春)" style="width:100%">
-        </div>
-        <div>
-          <label style="font-size:0.78rem;color:#b8a888;display:block;margin-bottom:4px">馬名</label>
-          <input type="text" id="recHorse" placeholder="例: ディープインパクト" style="width:100%">
-        </div>
-        <div>
-          <label style="font-size:0.78rem;color:#b8a888;display:block;margin-bottom:4px">賭け金（円）</label>
-          <input type="number" id="recBet" value="500" style="width:100%">
-        </div>
-        <div>
-          <label style="font-size:0.78rem;color:#b8a888;display:block;margin-bottom:4px">オッズ</label>
-          <input type="number" id="recOdds" value="5.0" step="0.1" style="width:100%">
-        </div>
+      <h3>➕ 予想を記録</h3>
+      <div class="race-input-grid">
+        <div><label class="input-label">日付</label><input type="text" id="recDate" placeholder="例: 4/25"></div>
+        <div><label class="input-label">レース名</label><input type="text" id="recRace" placeholder="天皇賞(春)"></div>
+        <div><label class="input-label">馬名</label><input type="text" id="recHorse" placeholder="ディープインパクト"></div>
+        <div><label class="input-label">賭け金（円）</label><input type="number" id="recBet" value="500"></div>
+        <div><label class="input-label">オッズ</label><input type="number" id="recOdds" value="5.0" step="0.1"></div>
+        <div><label class="input-label">EV（任意）</label><input type="number" id="recEV" step="0.01" placeholder="1.25"></div>
       </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-sm" onclick="addRecord(true)">✓ 的中</button>
-        <button class="btn-outline" onclick="addRecord(false)">✗ 外れ</button>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn-sm" onclick="addRecord(true)">✓ 的中で記録</button>
+        <button class="btn-outline" onclick="addRecord(false)">✗ 外れで記録</button>
       </div>
     </div>
     <div class="card">
-      <h3>📋 履歴</h3>
+      <h3>📋 予想履歴</h3>
       <div id="recordList"></div>
     </div>
   </div>
 </div>
 
 <script>
-// ====== 認証 ======
+'use strict';
+
+// ============================================================
+// 認証
+// ============================================================
 const PASS = 'nomizo2026';
 function doLogin(){
-  const v = document.getElementById('pw').value;
-  if(v === PASS){
+  if(document.getElementById('pw').value===PASS){
     localStorage.setItem('nomi_prem','1');
     showPremium();
   } else {
-    document.getElementById('err').style.display = 'block';
+    document.getElementById('err').style.display='block';
   }
 }
 function showPremium(){
-  document.getElementById('loginWrap').style.display = 'none';
-  document.getElementById('premiumWrap').style.display = 'block';
-  document.getElementById('logoutBtn').style.display = 'block';
-  initPremium();
+  document.getElementById('loginWrap').style.display='none';
+  document.getElementById('premiumWrap').style.display='block';
+  document.getElementById('logoutBtn').style.display='block';
+  loadData();
+  renderRecords();
 }
-function logout(){
-  localStorage.removeItem('nomi_prem');
-  location.reload();
-}
+function logout(){localStorage.removeItem('nomi_prem');location.reload();}
 if(localStorage.getItem('nomi_prem')==='1') showPremium();
 
-// ====== タブ切替 ======
+// ============================================================
+// タブ
+// ============================================================
 function switchTab(name){
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['today','ev','sim','record'][i]===name));
+  const names=['today','ev','manual','sim','record'];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',names[i]===name));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
 }
 
-// ====== レースデータ（リアルに近いサンプル + API試行） ======
-const TODAY_RACES = [
-  {name:'天皇賞（春）', grade:'G1', venue:'京都', distance:'3200m芝',
+// ============================================================
+// データ管理
+// ============================================================
+let RACES = [];  // 現在ロードされているレースデータ
+let dataIsLive = false;
+
+// JRA/netkeiba から実データ取得を試みる
+async function loadData(){
+  setStatus('loading','データ取得中...');
+  try {
+    const races = await fetchLiveRaces();
+    if(races && races.length){
+      RACES = races;
+      dataIsLive = true;
+      setStatus('live', `LIVE データ ／ ${new Date().toLocaleTimeString('ja')} 更新`);
+    } else {
+      throw new Error('no data');
+    }
+  } catch(e){
+    RACES = SAMPLE_RACES;
+    dataIsLive = false;
+    setStatus('sample','サンプルデータ（LIVE取得不可）');
+  }
+  renderToday();
+  renderEVTab();
+}
+
+function setStatus(type, msg){
+  const dot = document.getElementById('dataStatus').firstElementChild;
+  dot.className = type==='live'?'dot-live':'dot-sample';
+  document.getElementById('dataStatusTxt').textContent = msg;
+}
+
+// ネットワーク取得（CORSプロキシ経由）
+async function fetchLiveRaces(){
+  // JRAの当日レース情報取得を試みる
+  const proxyBase = 'https://api.allorigins.win/get?url=';
+  const target = encodeURIComponent('https://race.netkeiba.com/top/');
+  const resp = await fetch(proxyBase + target, {signal: AbortSignal.timeout(8000)});
+  if(!resp.ok) throw new Error('proxy failed');
+  const json = await resp.json();
+  const html = json.contents;
+  // 今日のレース一覧をHTMLからパース
+  const races = parseNetkeibaTodayRaces(html);
+  if(!races.length) throw new Error('parse failed');
+  return races;
+}
+
+function parseNetkeibaTodayRaces(html){
+  try {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const races = [];
+    // netkeiba の今日のレースリンクを探す（例: /race/202401040801）
+    const links = doc.querySelectorAll('a[href*="/race/"]');
+    const seen = new Set();
+    links.forEach(a=>{
+      const m = a.href.match(/\/race\/(\d{12})/);
+      if(m && !seen.has(m[1])){
+        seen.add(m[1]);
+        const txt = a.textContent.trim();
+        if(txt) races.push({id:m[1], name:txt, grade:'', horses:[]});
+      }
+    });
+    return races.slice(0,10);
+  } catch(e){ return []; }
+}
+
+// ============================================================
+// 独自確率モデル（EVエンジンのコア）
+// ============================================================
+// 競馬の市場オッズには約25%の控除率(takeout)が含まれる
+// 市場が示す確率 ≒ 1 / (odds × 1.0) だが控除込みのため過小評価気味
+// 我々のモデルは前走成績・斤量・人気集中度などで調整する
+
+const TAKEOUT = 0.25; // JRA単勝控除率
+
+function calcMarketProb(horses){
+  // 控除率を考慮した市場確率
+  const raw = horses.map(h => 1/h.odds);
+  const total = raw.reduce((s,v)=>s+v,0);
+  // totalは通常 1/(1-takeout) ≒ 1.33 になる
+  return raw.map(v => v/total * (1-TAKEOUT) + (v/total)*TAKEOUT/horses.length);
+}
+
+function calcModelProb(horses){
+  // 独自モデル: 市場確率をベースに調整係数を掛ける
+  const base = calcMarketProb(horses);
+  const adj = horses.map((h,i)=>{
+    let factor = 1.0;
+    // 前走着順による調整
+    if(h.prevRank===1) factor *= 1.18;
+    else if(h.prevRank===2) factor *= 1.08;
+    else if(h.prevRank===3) factor *= 1.03;
+    else if(h.prevRank>=6) factor *= 0.90;
+    // 斤量（重いほど不利）
+    if(h.weight){ factor *= (58-h.weight)*0.005+1.0; }
+    // 人気集中馬は市場が過大評価しがち → 若干割引
+    if(h.odds < 3.0) factor *= 0.92;
+    // 長穴馬（20倍超）は市場が過小評価しがち → 若干割増
+    if(h.odds > 20) factor *= 1.12;
+    return base[i] * factor;
+  });
+  // 正規化
+  const sum = adj.reduce((s,v)=>s+v,0);
+  return adj.map(v=>v/sum);
+}
+
+function calcEV(horse, modelProb){
+  // EV = モデル確率 × 単勝オッズ
+  return parseFloat((modelProb * horse.odds).toFixed(2));
+}
+
+function processRaceEV(horses){
+  const probs = calcModelProb(horses);
+  return horses.map((h,i)=>({
+    ...h,
+    modelProb: probs[i],
+    ev: calcEV(h, probs[i])
+  })).sort((a,b)=>b.ev-a.ev);
+}
+
+// ============================================================
+// サンプルデータ（LIVE失敗時フォールバック）
+// ============================================================
+const SAMPLE_RACES = [
+  {id:'s1', name:'天皇賞（春）', grade:'G1', venue:'京都', distance:'3200m芝',
    horses:[
-    {no:1, name:'ドウデュース', jockey:'武豊', weight:57, odds:3.5, prevRank:1, ai:0.32},
-    {no:2, name:'タスティエーラ', jockey:'松山弘平', weight:57, odds:6.2, prevRank:2, ai:0.18},
-    {no:3, name:'ディープボンド', jockey:'和田竜二', weight:57, odds:8.4, prevRank:3, ai:0.14},
-    {no:4, name:'ブローザホーン', jockey:'菅原明良', weight:57, odds:12.0, prevRank:4, ai:0.10},
-    {no:5, name:'シルヴァーソニック', jockey:'坂井瑠星', weight:57, odds:15.5, prevRank:5, ai:0.08},
-    {no:6, name:'ヒートオンビート', jockey:'池添謙一', weight:57, odds:18.0, prevRank:6, ai:0.07},
-    {no:7, name:'マテンロウレオ', jockey:'横山典弘', weight:57, odds:22.0, prevRank:7, ai:0.06},
-    {no:8, name:'テーオーロイヤル', jockey:'菱田裕二', weight:57, odds:25.0, prevRank:8, ai:0.05}
+    {no:1,name:'ドウデュース',jockey:'武豊',weight:57,odds:3.5,prevRank:1},
+    {no:2,name:'タスティエーラ',jockey:'松山弘平',weight:57,odds:6.2,prevRank:2},
+    {no:3,name:'ディープボンド',jockey:'和田竜二',weight:57,odds:8.4,prevRank:3},
+    {no:4,name:'ブローザホーン',jockey:'菅原明良',weight:57,odds:12.0,prevRank:4},
+    {no:5,name:'シルヴァーソニック',jockey:'坂井瑠星',weight:57,odds:15.5,prevRank:5},
+    {no:6,name:'ヒートオンビート',jockey:'池添謙一',weight:57,odds:18.0,prevRank:3},
+    {no:7,name:'マテンロウレオ',jockey:'横山典弘',weight:57,odds:22.0,prevRank:6},
+    {no:8,name:'テーオーロイヤル',jockey:'菱田裕二',weight:57,odds:28.0,prevRank:2}
   ]},
-  {name:'新潟大賞典', grade:'G3', venue:'新潟', distance:'2000m芝',
+  {id:'s2', name:'新潟大賞典', grade:'G3', venue:'新潟', distance:'2000m芝',
    horses:[
-    {no:1, name:'エピファニー', jockey:'川田将雅', weight:56, odds:4.2, prevRank:1, ai:0.28},
-    {no:2, name:'ノッキングポイント', jockey:'戸崎圭太', weight:56, odds:5.8, prevRank:2, ai:0.21},
-    {no:3, name:'ホウオウビスケッツ', jockey:'岩田望来', weight:56, odds:9.0, prevRank:3, ai:0.13},
-    {no:4, name:'ヤマニンサンパ', jockey:'幸英明', weight:55, odds:11.0, prevRank:4, ai:0.11},
-    {no:5, name:'トップナイフ', jockey:'角田大河', weight:56, odds:14.0, prevRank:5, ai:0.09},
-    {no:6, name:'アルビージャ', jockey:'三浦皇成', weight:55, odds:20.0, prevRank:6, ai:0.06},
+    {no:1,name:'エピファニー',jockey:'川田将雅',weight:56,odds:4.2,prevRank:1},
+    {no:2,name:'ノッキングポイント',jockey:'戸崎圭太',weight:56,odds:5.8,prevRank:2},
+    {no:3,name:'ホウオウビスケッツ',jockey:'岩田望来',weight:56,odds:9.0,prevRank:1},
+    {no:4,name:'ヤマニンサンパ',jockey:'幸英明',weight:55,odds:11.0,prevRank:4},
+    {no:5,name:'トップナイフ',jockey:'角田大河',weight:56,odds:14.0,prevRank:5},
+    {no:6,name:'アルビージャ',jockey:'三浦皇成',weight:55,odds:24.0,prevRank:3}
   ]},
-  {name:'京都新聞杯', grade:'G2', venue:'京都', distance:'2200m芝',
+  {id:'s3', name:'京都新聞杯', grade:'G2', venue:'京都', distance:'2200m芝',
    horses:[
-    {no:1, name:'サンライズジパング', jockey:'福永祐一', weight:56, odds:5.5, prevRank:1, ai:0.24},
-    {no:2, name:'シリウスコルト', jockey:'浜中俊', weight:56, odds:7.2, prevRank:2, ai:0.18},
-    {no:3, name:'アーバンシック', jockey:'横山武史', weight:56, odds:9.5, prevRank:3, ai:0.13},
-    {no:4, name:'コスモキュランダ', jockey:'石橋脩', weight:56, odds:12.0, prevRank:4, ai:0.10},
-    {no:5, name:'ショウナンラプンタ', jockey:'丸山元気', weight:56, odds:16.0, prevRank:5, ai:0.08},
+    {no:1,name:'サンライズジパング',jockey:'松山弘平',weight:56,odds:5.5,prevRank:1},
+    {no:2,name:'シリウスコルト',jockey:'浜中俊',weight:56,odds:7.2,prevRank:2},
+    {no:3,name:'アーバンシック',jockey:'横山武史',weight:56,odds:9.5,prevRank:3},
+    {no:4,name:'コスモキュランダ',jockey:'石橋脩',weight:56,odds:12.0,prevRank:4},
+    {no:5,name:'ショウナンラプンタ',jockey:'丸山元気',weight:56,odds:22.0,prevRank:2}
   ]}
 ];
 
-function calcEV(horse){ return (horse.odds * horse.ai).toFixed(2) * 1; }
-function getGradeBadge(g){
-  const m = {G1:'badge-g1',G2:'badge-g2',G3:'badge-g3'};
-  return `<span class="${m[g]||''}">${g}</span>`;
-}
-
-// ====== タブ1: 本日の注目馬 ======
-function initToday(){
+// ============================================================
+// 本日の注目馬タブ
+// ============================================================
+function renderToday(){
   const el = document.getElementById('todayPicks');
-  let html = '';
-  TODAY_RACES.forEach(race=>{
-    const best = race.horses.slice().sort((a,b)=>calcEV(b)-calcEV(a))[0];
-    const ev = calcEV(best);
-    const evCls = ev>=1.2?'ev-high':ev>=1.0?'ev-mid':'ev-low';
-    html+=`<div class="today-pick">
-      <div>
-        <div class="pick-race">${race.venue} ${race.distance} ${getGradeBadge(race.grade)}</div>
-        <div style="font-size:0.95rem;margin-bottom:2px">${race.name}</div>
-        <div class="pick-horse">◎ ${best.name} <span style="font-size:0.82rem;color:#b8a888">(${best.jockey})</span></div>
-        <div class="pick-ev">EV: <span class="${evCls}">${ev}</span> ／ オッズ ${best.odds}倍 ／ AI確率 ${Math.round(best.ai*100)}%</div>
+  if(!RACES.length){el.innerHTML='<div class="loading">レースデータがありません</div>';return;}
+  let html='';
+  RACES.forEach(race=>{
+    if(!race.horses||!race.horses.length) return;
+    const processed = processRaceEV(race.horses);
+    const best = processed[0];
+    const evCls = best.ev>=1.2?'ev-high':best.ev>=1.0?'ev-mid':'ev-low';
+    const rec = best.ev>=1.2?'<span class="badge-buy">◎ 強推奨</span>':best.ev>=1.0?'<span class="badge-watch">○ 検討</span>':'<span class="badge-skip">─ 見</span>';
+    html+=`<div class="pick-card">
+      <div class="pick-left">
+        <div class="race-nm">${race.venue||''}${race.distance?'・'+race.distance:''} ${grBadge(race.grade)}</div>
+        <div style="font-size:0.92rem;margin-bottom:4px">${race.name}</div>
+        <div class="horse-nm">◎ ${best.name}${best.jockey?' <span style="font-size:0.8rem;color:#b8a888">('+best.jockey+')</span>':''}</div>
+        <div class="pick-detail">EV <strong class="${evCls}">${best.ev}</strong> ／ オッズ ${best.odds}倍 ／ モデル確率 ${(best.modelProb*100).toFixed(1)}%</div>
       </div>
-      <div style="text-align:right">
-        <div class="${ev>=1.2?'rec-buy':ev>=1.0?'rec-watch':'rec-skip'}">${ev>=1.2?'◎ 強推奨':ev>=1.0?'○ 検討':'— 見'}</div>
-        <div style="font-size:0.78rem;color:#555;margin-top:6px">馬番 ${best.no}</div>
-      </div>
+      <div class="pick-right">${rec}<div style="font-size:0.74rem;color:#555;margin-top:6px">馬番 ${best.no}</div></div>
     </div>`;
   });
-  el.innerHTML = html;
+  el.innerHTML = html||'<div class="loading">本日の推奨馬なし</div>';
 }
 
-// ====== タブ2: EV詳細分析 ======
-function initEVTab(){
+// ============================================================
+// EV詳細分析タブ
+// ============================================================
+function renderEVTab(){
   const pills = document.getElementById('racePills');
-  pills.innerHTML = TODAY_RACES.map((r,i)=>`<div class="race-pill${i===0?' active':''}" onclick="selectRace(${i},this)">${r.name}</div>`).join('');
-  selectRace(0, pills.children[0]);
+  if(!RACES.length){pills.innerHTML='<div class="loading">データなし</div>';return;}
+  pills.innerHTML = RACES.filter(r=>r.horses&&r.horses.length).map((r,i)=>
+    `<div class="pill${i===0?' active':''}" onclick="selectRace(${i},this)">${r.name}</div>`
+  ).join('');
+  if(RACES[0]&&RACES[0].horses.length) selectRace(0, pills.children[0]);
 }
+
 function selectRace(idx, el){
-  document.querySelectorAll('.race-pill').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
-  const race = TODAY_RACES[idx];
-  const sorted = race.horses.slice().sort((a,b)=>calcEV(b)-calcEV(a));
-  let html=`<div style="margin-bottom:10px;font-size:0.85rem;color:#b8a888">${race.venue}・${race.distance} ${getGradeBadge(race.grade)}</div>
-  <div style="overflow-x:auto"><table>
-  <thead><tr><th>馬番</th><th>馬名</th><th>騎手</th><th>オッズ</th><th>AI確率</th><th>期待値EV</th><th>推奨</th></tr></thead><tbody>`;
-  sorted.forEach(h=>{
-    const ev = calcEV(h);
-    const evCls = ev>=1.2?'ev-high':ev>=1.0?'ev-mid':'ev-low';
-    const rec = ev>=1.2?'<span class="rec-buy">◎ 強推奨</span>':ev>=1.0?'<span class="rec-watch">○ 検討</span>':'<span class="rec-skip">— 見</span>';
-    html+=`<tr><td>${h.no}</td><td><strong>${h.name}</strong></td><td>${h.jockey}</td><td>${h.odds}倍</td><td>${Math.round(h.ai*100)}%</td><td class="${evCls}"><strong>${ev}</strong></td><td>${rec}</td></tr>`;
+  const race = RACES[idx];
+  if(!race||!race.horses.length){document.getElementById('evTable').innerHTML='<div class="loading">出走馬データなし</div>';return;}
+  const processed = processRaceEV(race.horses);
+  let html=`<div style="font-size:0.8rem;color:#b8a888;margin-bottom:10px">${race.venue||''}${race.distance?'・'+race.distance:''} ${grBadge(race.grade)} ／ 控除後モデルEV</div>
+  <div class="tbl-wrap"><table>
+  <thead><tr><th>馬番</th><th>馬名</th><th>騎手</th><th>オッズ</th><th>市場確率</th><th>モデル確率</th><th style="color:#c8911a">EV</th><th>判定</th></tr></thead><tbody>`;
+  const mktProbs = calcMarketProb(race.horses);
+  processed.forEach((h,i)=>{
+    const origIdx = race.horses.findIndex(x=>x.no===h.no);
+    const mkt = mktProbs[origIdx]||0;
+    const evCls = h.ev>=1.2?'ev-high':h.ev>=1.0?'ev-mid':'ev-low';
+    const rec = h.ev>=1.2?'<span class="badge-buy">◎</span>':h.ev>=1.0?'<span class="badge-watch">○</span>':'<span class="badge-skip">─</span>';
+    html+=`<tr>
+      <td>${h.no}</td>
+      <td><strong>${h.name}</strong></td>
+      <td style="color:#b8a888">${h.jockey||'-'}</td>
+      <td>${h.odds}倍</td>
+      <td style="color:#b8a888">${(mkt*100).toFixed(1)}%</td>
+      <td style="color:#c8911a">${(h.modelProb*100).toFixed(1)}%</td>
+      <td class="${evCls}"><strong>${h.ev}</strong></td>
+      <td>${rec}</td>
+    </tr>`;
   });
-  html+='</tbody></table></div>';
+  html+='</tbody></table></div><div style="font-size:0.74rem;color:#555;margin-top:8px">市場確率との乖離が大きいほどEVに影響。モデル確率>市場確率の馬が高EV候補。</div>';
   document.getElementById('evTable').innerHTML = html;
 }
 
-// ====== タブ3: シミュレーター ======
+// ============================================================
+// 手動入力EV計算
+// ============================================================
+function loadSample(){
+  document.getElementById('manualRaceName').value='天皇賞（春）';
+  document.getElementById('manualGrade').value='G1';
+  document.getElementById('manualDistance').value='3200m芝';
+  document.getElementById('manualData').value=
+`ドウデュース,3.5,1,57
+タスティエーラ,6.2,2,57
+ディープボンド,8.4,3,57
+ブローザホーン,12.0,4,57
+シルヴァーソニック,15.5,5,57
+テーオーロイヤル,28.0,2,57`;
+}
+
+function calcManual(){
+  const raw = document.getElementById('manualData').value.trim();
+  const raceName = document.getElementById('manualRaceName').value||'入力レース';
+  const lines = raw.split('\n').filter(l=>l.trim());
+  if(!lines.length){alert('出走馬データを入力してください');return;}
+  const horses = [];
+  lines.forEach((line,i)=>{
+    const parts = line.split(',');
+    if(parts.length<2) return;
+    horses.push({
+      no: i+1,
+      name: parts[0].trim(),
+      odds: parseFloat(parts[1])||10,
+      prevRank: parseInt(parts[2])||3,
+      weight: parseInt(parts[3])||57,
+      jockey: parts[4]||''
+    });
+  });
+  if(!horses.length){alert('有効なデータがありません');return;}
+  const processed = processRaceEV(horses);
+  const mktProbs = calcMarketProb(horses);
+  let html=`<h4 style="color:#c8911a;margin-bottom:12px">${raceName} ― EV分析結果</h4>
+  <div class="tbl-wrap"><table>
+  <thead><tr><th>馬番</th><th>馬名</th><th>オッズ</th><th>前走</th><th>市場確率</th><th>モデル確率</th><th style="color:#c8911a">EV</th><th>判定</th></tr></thead><tbody>`;
+  processed.forEach(h=>{
+    const origIdx = horses.findIndex(x=>x.no===h.no);
+    const mkt = mktProbs[origIdx]||0;
+    const evCls = h.ev>=1.2?'ev-high':h.ev>=1.0?'ev-mid':'ev-low';
+    const rec = h.ev>=1.2?'<span class="badge-buy">◎ 強推奨</span>':h.ev>=1.0?'<span class="badge-watch">○ 検討</span>':'<span class="badge-skip">─ 見</span>';
+    html+=`<tr><td>${h.no}</td><td><strong>${h.name}</strong></td><td>${h.odds}倍</td><td>${h.prevRank}着</td>
+    <td style="color:#b8a888">${(mkt*100).toFixed(1)}%</td>
+    <td style="color:#c8911a">${(h.modelProb*100).toFixed(1)}%</td>
+    <td class="${evCls}"><strong>${h.ev}</strong></td><td>${rec}</td></tr>`;
+  });
+  html+='</tbody></table></div>';
+  // 推奨馬まとめ
+  const recs = processed.filter(h=>h.ev>=1.0);
+  if(recs.length){
+    html+=`<div class="alert-warn" style="margin-top:14px">
+      <strong>推奨買い目：</strong> ${recs.map(h=>`${h.name}（EV${h.ev}）`).join(' ／ ')}
+    </div>`;
+  }
+  document.getElementById('manualResult').innerHTML = html;
+}
+
+// ============================================================
+// シミュレーター
+// ============================================================
 function calcSim(){
   const budget = parseInt(document.getElementById('budget').value)||3000;
-  const type = document.getElementById('betType').value;
-  const allHorses = TODAY_RACES.flatMap(r=>r.horses.map(h=>({...h,race:r.name})));
-  const recs = allHorses.filter(h=>calcEV(h)>=1.0).sort((a,b)=>calcEV(b)-calcEV(a)).slice(0,4);
-  if(!recs.length){ document.getElementById('simResult').innerHTML='<div class="loading">本日はEV1.0以上の推奨馬がありません</div>'; return; }
-  const perHorse = Math.floor(budget/recs.length/100)*100||100;
-  let html='<div class="sim-result">';
-  let totalBet=0, expectedReturn=0;
-  recs.forEach(h=>{
-    const bet=perHorse, ev=calcEV(h);
-    totalBet+=bet; expectedReturn+=bet*ev;
-    const typeName = {win:'単勝',place:'複勝',exacta:'馬連'}[type];
-    html+=`<div class="sim-row"><span>${h.race}：${h.name}</span><span style="color:#b8a888">${typeName} ${bet.toLocaleString()}円 (EV ${ev})</span></div>`;
+  const betType = document.getElementById('betType').value;
+  const threshold = parseFloat(document.getElementById('evThreshold').value)||1.1;
+  const betTypeName = {win:'単勝',place:'複勝',quinella:'馬連'}[betType];
+  const allHorses = RACES.flatMap(r=>{
+    if(!r.horses||!r.horses.length) return [];
+    return processRaceEV(r.horses).map(h=>({...h,raceName:r.name}));
   });
+  const recs = allHorses.filter(h=>h.ev>=threshold).sort((a,b)=>b.ev-a.ev).slice(0,5);
+  if(!recs.length){
+    document.getElementById('simResult').innerHTML=`<div class="alert-warn">EV${threshold}以上の推奨馬がありません。閾値を下げるか手動入力タブで試してください。</div>`;
+    return;
+  }
+  const perHorse = Math.max(100, Math.floor(budget/recs.length/100)*100);
+  let totalBet=0, expectedRet=0;
+  let html='<div class="sim-result">';
+  recs.forEach(h=>{
+    const bet = perHorse;
+    totalBet+=bet;
+    expectedRet+=bet*h.ev;
+    html+=`<div class="sim-row">
+      <span>${h.raceName}：<strong>${h.name}</strong></span>
+      <span style="color:#b8a888">${betTypeName} ${bet.toLocaleString()}円 <span class="ev-mid">EV${h.ev}</span></span>
+    </div>`;
+  });
+  const surplus = Math.round(expectedRet-totalBet);
+  const recovery = Math.round(expectedRet/totalBet*100);
   html+=`<div class="sim-row"><span>合計投資</span><span>${totalBet.toLocaleString()}円</span></div>`;
-  html+=`<div class="sim-row"><span>期待収支</span><span style="color:${expectedReturn>=totalBet?'#8fb87a':'#ff6b6b'}">${expectedReturn>=totalBet?'+':''}${Math.round(expectedReturn-totalBet).toLocaleString()}円（回収率 ${Math.round(expectedReturn/totalBet*100)}%）</span></div>`;
-  html+='</div><div style="font-size:0.75rem;color:#555;margin-top:8px;text-align:right">※期待値ベースの試算です。実際の結果を保証するものではありません。</div>';
+  html+=`<div class="sim-row"><span>期待収支</span><span style="color:${surplus>=0?'#8fb87a':'#ff6b6b'}">${surplus>=0?'+':''}${surplus.toLocaleString()}円（回収率 ${recovery}%）</span></div>`;
+  html+='</div><div style="font-size:0.72rem;color:#555;margin-top:8px">※期待値ベースの試算です。実際の結果を保証するものではありません。</div>';
   document.getElementById('simResult').innerHTML = html;
 }
 
-// ====== タブ4: 予想記録帳 ======
-function getRecords(){ return JSON.parse(localStorage.getItem('nomi_records')||'[]'); }
-function saveRecords(r){ localStorage.setItem('nomi_records',JSON.stringify(r)); }
+// ============================================================
+// 予想記録帳
+// ============================================================
+function getRecords(){return JSON.parse(localStorage.getItem('nomi_records')||'[]');}
+function saveRecords(r){localStorage.setItem('nomi_records',JSON.stringify(r));}
+
 function addRecord(isHit){
+  const date=document.getElementById('recDate').value||new Date().toLocaleDateString('ja');
   const race=document.getElementById('recRace').value.trim();
   const horse=document.getElementById('recHorse').value.trim();
   const bet=parseInt(document.getElementById('recBet').value)||500;
   const odds=parseFloat(document.getElementById('recOdds').value)||5.0;
-  if(!race||!horse){ alert('レース名と馬名を入力してください'); return; }
+  const ev=parseFloat(document.getElementById('recEV').value)||null;
+  if(!race||!horse){alert('レース名と馬名を入力してください');return;}
   const recs=getRecords();
-  recs.unshift({date:new Date().toLocaleDateString('ja'),race,horse,bet,odds,hit:isHit,ret:isHit?Math.round(bet*odds):0});
+  recs.unshift({date,race,horse,bet,odds,ev,hit:isHit,ret:isHit?Math.round(bet*odds):0});
   saveRecords(recs);
   renderRecords();
-  ['recRace','recHorse'].forEach(id=>document.getElementById(id).value='');
+  ['recRace','recHorse','recEV'].forEach(id=>document.getElementById(id).value='');
 }
-function deleteRecord(idx){ const r=getRecords(); r.splice(idx,1); saveRecords(r); renderRecords(); }
+
+function deleteRecord(idx){
+  const r=getRecords(); r.splice(idx,1); saveRecords(r); renderRecords();
+}
+
 function renderRecords(){
   const recs=getRecords();
   const hits=recs.filter(r=>r.hit).length;
@@ -354,23 +640,34 @@ function renderRecords(){
   const totalRet=recs.reduce((s,r)=>s+r.ret,0);
   const rate=recs.length?Math.round(hits/recs.length*100):0;
   const recovery=totalBet?Math.round(totalRet/totalBet*100):0;
+  const pnl=totalRet-totalBet;
   document.getElementById('recordStats').innerHTML=`
-    <div class="stat"><div class="stat-n">${rate}%</div><div class="stat-l">的中率</div></div>
-    <div class="stat"><div class="stat-n">${recovery}%</div><div class="stat-l">回収率</div></div>
-    <div class="stat"><div class="stat-n">${recs.length}</div><div class="stat-l">累計予想数</div></div>`;
+    <div class="stat-box"><div class="stat-n">${rate}%</div><div class="stat-l">的中率</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:${recovery>=100?'#8fb87a':'#c8911a'}">${recovery}%</div><div class="stat-l">回収率</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:${pnl>=0?'#8fb87a':'#ff6b6b'}">${pnl>=0?'+':''}${pnl.toLocaleString()}</div><div class="stat-l">累計収支（円）</div></div>
+    <div class="stat-box"><div class="stat-n">${recs.length}</div><div class="stat-l">累計予想数</div></div>`;
   const list=document.getElementById('recordList');
-  if(!recs.length){ list.innerHTML='<div style="color:#555;text-align:center;padding:20px;font-size:0.85rem">まだ記録がありません</div>'; return; }
-  list.innerHTML=recs.map((r,i)=>`<div class="history-item">
-    <div><div style="font-size:0.78rem;color:#555">${r.date} ${r.race}</div><div>${r.horse} (${r.odds}倍)</div></div>
-    <div style="text-align:right">
-      <div class="${r.hit?'hit':'miss'}">${r.hit?`✓ +${r.ret.toLocaleString()}円`:`✗ -${r.bet.toLocaleString()}円`}</div>
-      <button class="btn-danger" style="font-size:0.72rem;padding:3px 8px;margin-top:4px" onclick="deleteRecord(${i})">削除</button>
-    </div>
-  </div>`).join('');
+  if(!recs.length){list.innerHTML='<div style="color:#555;text-align:center;padding:20px;font-size:0.85rem">まだ記録がありません</div>';return;}
+  list.innerHTML=recs.map((r,i)=>`
+    <div class="rec-item">
+      <div>
+        <div style="font-size:0.74rem;color:#555">${r.date} ${r.race}${r.ev?' EV'+r.ev:''}</div>
+        <div>${r.horse} <span style="color:#b8a888">${r.odds}倍</span></div>
+      </div>
+      <div style="text-align:right">
+        <div class="${r.hit?'hit':'miss'}">${r.hit?'✓ +'+r.ret.toLocaleString()+'円':'✗ -'+r.bet.toLocaleString()+'円'}</div>
+        <button class="btn-danger" style="font-size:0.7rem;padding:2px 7px;margin-top:4px" onclick="deleteRecord(${i})">削除</button>
+      </div>
+    </div>`).join('');
 }
 
-// ====== 初期化 ======
-function initPremium(){ initToday(); initEVTab(); renderRecords(); }
+// ============================================================
+// ユーティリティ
+// ============================================================
+function grBadge(g){
+  const m={G1:'badge-g1',G2:'badge-g2',G3:'badge-g3'};
+  return g&&m[g]?`<span class="${m[g]}">${g}</span>`:'';
+}
 </script>
 </body>
 </html>
