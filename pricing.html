@@ -6,9 +6,9 @@
 <title>運が馬を引き寄せる！ プレミアム会員</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; background: #0f0f1a; color: #e8e8f0; min-height: 100vh; }
-  .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid #2a2a4a; }
-  .logo { font-size: 2.5rem; font-weight: bold; color: #ffd700; margin-bottom: 10px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; background: #100c08; color: #e8e8f0; min-height: 100vh; }
+  .hero { background: linear-gradient(135deg, #1e1610 0%, #16213e 50%, #2a1a08 100%); padding: 60px 20px; text-align: center; border-bottom: 1px solid #3a2e1e; }
+  .logo { font-size: 2.5rem; font-weight: bold; color: #c8911a; margin-bottom: 10px; }
   .logo span { color: #fff; }
   .tagline { font-size: 1.1rem; color: #a0a0c0; margin-bottom: 30px; }
   .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
@@ -16,39 +16,39 @@
   .subtitle { text-align: center; color: #a0a0c0; margin-bottom: 40px; }
   .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 50px; }
   @media (max-width: 600px) { .plans { grid-template-columns: 1fr; } }
-  .plan { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 16px; padding: 32px 24px; position: relative; }
-  .plan.featured { border-color: #ffd700; }
-  .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #ffd700; color: #0f0f1a; font-size: 12px; font-weight: bold; padding: 4px 16px; border-radius: 20px; }
+  .plan { background: #1e1610; border: 1px solid #3a2e1e; border-radius: 16px; padding: 32px 24px; position: relative; }
+  .plan.featured { border-color: #c8911a; }
+  .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #c8911a; color: #100c08; font-size: 12px; font-weight: bold; padding: 4px 16px; border-radius: 20px; }
   .plan-name { font-size: 1.1rem; color: #a0a0c0; margin-bottom: 8px; }
   .plan-price { font-size: 2.4rem; font-weight: bold; color: #fff; margin-bottom: 4px; }
   .plan-price span { font-size: 1rem; color: #a0a0c0; font-weight: normal; }
   .plan-desc { font-size: 0.9rem; color: #a0a0c0; margin-bottom: 24px; }
   .features { list-style: none; margin-bottom: 28px; }
-  .features li { padding: 8px 0; border-bottom: 1px solid #2a2a4a; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+  .features li { padding: 8px 0; border-bottom: 1px solid #3a2e1e; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
   .features li:last-child { border-bottom: none; }
-  .check { color: #ffd700; font-weight: bold; }
+  .check { color: #c8911a; font-weight: bold; }
   .cross { color: #555; }
   .btn { display: block; width: 100%; padding: 14px; border-radius: 10px; font-size: 1rem; font-weight: bold; text-align: center; text-decoration: none; cursor: pointer; border: none; }
-  .btn-primary { background: #ffd700; color: #0f0f1a; }
-  .btn-primary:hover { background: #ffed4a; }
-  .btn-secondary { background: transparent; color: #a0a0c0; border: 1px solid #2a2a4a; }
-  .how { background: #1a1a2e; border-radius: 16px; padding: 32px; margin-bottom: 40px; }
-  .how h3 { font-size: 1.3rem; margin-bottom: 20px; color: #ffd700; }
+  .btn-primary { background: #c8911a; color: #100c08; }
+  .btn-primary:hover { background: #e0a832; }
+  .btn-secondary { background: transparent; color: #a0a0c0; border: 1px solid #3a2e1e; }
+  .how { background: #1e1610; border-radius: 16px; padding: 32px; margin-bottom: 40px; }
+  .how h3 { font-size: 1.3rem; margin-bottom: 20px; color: #c8911a; }
   .steps { display: flex; flex-direction: column; gap: 16px; }
   .step { display: flex; gap: 16px; align-items: flex-start; }
-  .step-num { background: #ffd700; color: #0f0f1a; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; flex-shrink: 0; }
+  .step-num { background: #c8911a; color: #100c08; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; flex-shrink: 0; }
   .step-text h4 { font-size: 1rem; margin-bottom: 4px; }
   .step-text p { font-size: 0.9rem; color: #a0a0c0; }
-  .step-text a { color: #ffd700; }
+  .step-text a { color: #c8911a; }
   .faq { margin-bottom: 40px; }
   .faq h3 { font-size: 1.3rem; margin-bottom: 20px; color: #fff; text-align: center; }
-  .faq-item { background: #1a1a2e; border-radius: 10px; padding: 20px; margin-bottom: 12px; }
-  .faq-item h4 { font-size: 0.95rem; margin-bottom: 8px; color: #ffd700; }
+  .faq-item { background: #1e1610; border-radius: 10px; padding: 20px; margin-bottom: 12px; }
+  .faq-item h4 { font-size: 0.95rem; margin-bottom: 8px; color: #c8911a; }
   .faq-item p { font-size: 0.9rem; color: #a0a0c0; line-height: 1.6; }
-  footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; border-top: 1px solid #2a2a4a; }
-  .nav { display: flex; justify-content: center; gap: 20px; padding: 16px; background: #1a1a2e; border-bottom: 1px solid #2a2a4a; }
+  footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; border-top: 1px solid #3a2e1e; }
+  .nav { display: flex; justify-content: center; gap: 20px; padding: 16px; background: #1e1610; border-bottom: 1px solid #3a2e1e; }
   .nav a { color: #a0a0c0; text-decoration: none; font-size: 0.9rem; }
-  .nav a:hover { color: #ffd700; }
+  .nav a:hover { color: #c8911a; }
 </style>
 </head>
 <body>
